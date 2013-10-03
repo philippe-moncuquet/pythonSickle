@@ -1,17 +1,23 @@
 import sys
 from itertools import islice
 
-input_file = sys.argv[1]
+def parse_fastq_file(input_file):
+    '''Take an input file in fastq format and read 4 lines in at a time
+    '''
+    assert input_file.endswith('.fastq') or input_file.endswith('.fq')
+    with open(input_file) as f:
+        #while there are lines to read
+        while True:
+            #read in 4 lines at a time and make them into a list
+            read=list(islice(f,4))
+            #if there are really 4 lines concatenate them with newlines into a string
+            if read:                     
+                return '\n'.join(read)
+                
+            else:
+                break
 
-
-with open(input_file) as f:
-    lines=[]
-    while True:
-        line=list(islice(f,4))
-        #islice returns an iterator ,so you convert it to list here.
-        if line:                     
-            #do something with current set of <=4 lines here
-            lines.append(line)       # may be store it 
-        else:
-            break
-    print lines
+            
+if __name__ == '__main__':
+    file_name = sys.argv[1]
+    parse_fastq_file(file_name)
