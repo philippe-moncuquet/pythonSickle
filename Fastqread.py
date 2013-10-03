@@ -7,16 +7,18 @@ class fastqread:
         ''' Take a string corresponding to a read from a fastq file, return 3 attributes: 
             name of sequence, sequence, quality score
         '''
-        input = split(fastq_str,"/n")
+        input = fastq_str.split("/n")
         self.name = input[0]
         self.seq = DNAsequence(input[1])
-        self.score = qualityScore(input[2])
+        self.score = qualityScore(input[3])
     
-    def slide_window(self,qual_str,window_size,quality_threshold):
+    def slide_window(self,threshold):
         ''' slide a window and calculate average. Output the 5 end trim index
-            and 3'end trim index
+            and 3'end trim index according to the threshold. When average is above threshold, the 
+            start of the window becomes the 5 end trim index. When the average becomes lower than threshold 
+            again, the start of the window is used for 3 end trimming index.
         '''
-        windowLen = self.seq.window_size
+        windowLen = self.seq.window_size()
         self.score.convert()
         start_cut = 0
         end_cut = 0
