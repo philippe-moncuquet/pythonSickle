@@ -32,18 +32,6 @@ class DNAsequence:
             window_length = 1
         
         return window_length
-    
-    def trim(self,start,end):
-        '''Trim the sequence from start to end. Takes as input 2 integers
-        
-        #>>> test_read = DNAsequence(read)
-        #>>> test_read.trim(start_no_cut, end_no_cut)
-        'NTTTTTCCTTCCTTTAAAAC'
-        #>>> test_read = DNAsequence(read)
-        #>>> test_read.trim(start_small_cut, end_small_cut)
-        'TCCTTCCTTTA'
-        '''
-        self.dna_str = self.dna_str[start:end+1]
 
 
 if __name__ == '__main__':
@@ -53,10 +41,5 @@ if __name__ == '__main__':
     long_read = 'TTTAAAACTTTAAAACGTAC'
     float_read = 'TCCTTCCTTTAAAATCCTTCCTTTAAAATCCTTTAG'
     exact_length_read = 'CCTTTAAAAC'
-    
-    #Testing trimming function with different positions for starting and ending trim
-    read = 'NTTTTTCCTTCCTTTAAAAC'
-    start_no_cut, end_no_cut = 0, 20
-    start_small_cut, end_small_cut = 5, 15
     
     doctest.testmod()
