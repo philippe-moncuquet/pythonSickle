@@ -12,6 +12,7 @@ class qualityScore:
         '''
         self.qualString = fastqQual
         self.qualList = []
+        self.convert()
         
     def convert(self):
         '''Transform the quality score string element into integer and record them in the qualityNumbers list

@@ -23,16 +23,16 @@ class fastqread:
         start_cut = 0
         end_cut = 0
         aver = 0
-        flag == False
-        for i in range(len(self.score)/windowLen):
-            subscore = self.score.qualList[i*windowLen,(i+1)*windowLen]
+        flag = False
+        for i in range(len(self.score.qualList)/windowLen):
+            subscore = self.score.qualList[i*windowLen:(i+1)*windowLen]
             aver = sum(subscore)/len(subscore)
             if aver > threshold:
                 start_cut = i*windowLen
                 flag == True
             if aver < threshold and flag == True:
                 end_cut = i*windowLen
-        self.trim(start_cut,end_cut)
+        self.trim_seq(start_cut,end_cut)
             
 
     def trim_seq(self,start_index,end_index):
@@ -41,12 +41,12 @@ class fastqread:
         self.seq.trim(start_index,end_index)
         self.score.trim(start_index,end_index)
     
-    def convert_to_fastq_str(self,threshold):
+    def convert_to_fastq_str(self):
         '''
             create a read in fastq format. Create an empty string if length of sequence is
             lower than threshold
         '''
-        return '\n'.join([self.name,self.seq,"+",self.score])
+        return '\n'.join([self.name,self.seq.dna_str,"+",self.score.qualString])
      
 if __name__ == '__main__':
     import doctest
