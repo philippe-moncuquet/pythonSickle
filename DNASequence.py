@@ -1,4 +1,4 @@
-import doctest
+from Trim_function import trim
 
 class DNAsequence:
     def __init__(self, dna_str):
@@ -32,11 +32,23 @@ class DNAsequence:
             window_length = 1
         
         return window_length
-
+     
+    def trim(self,start,end):
+        '''
+        Given a start and an end index trim the quality score string attribute and keep the middle.
+        start and end are integers.
+        Input: 
+            start : Integer
+            end : Integer
+        Output:
+            modify self.dna_str
+        '''
+        self.dna_str = trim(self.dna_str,start,end)
 
 if __name__ == '__main__':
     #Test window function with some dummy sequencing reads.
     #One read under threshold of 1, one over 1.
+    import doctest
     short_read = 'TTTAAAAC'
     long_read = 'TTTAAAACTTTAAAACGTAC'
     float_read = 'TCCTTCCTTTAAAATCCTTCCTTTAAAATCCTTTAG'

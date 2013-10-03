@@ -1,3 +1,5 @@
+from Trim_function import trim
+
 class qualityScore:
     def __init__(self,fastqQual):
         '''Create a string attribute which represent the quality score
@@ -19,13 +21,15 @@ class qualityScore:
             
             >>> x = qualityScore('^ac')
             >>> x.convert()
-            [94]
+            >>> x.qualList
+            [94, 97, 99]
             
             >>> x = qualityScore('')
             >>> x.convert()
-            >>> []
+            >>> x.qualList
+            []
         '''
-        for el in self.qualString:
+        for el in self.qualString: 
             self.qualList.append(ord(el)) #ord transform the ACSII character into integer
             
     
@@ -42,21 +46,13 @@ class qualityScore:
         >>> x = qualityScore('^acebeg')
         >>> x.convert()
         >>> x.trim(1, 2)
-        >>> self.qualString
+        >>> x.qualString
         'ac'
-        >>> self.qualList
-        [97,99]
+        >>> x.qualList
+        [97, 99]
         '''
-        if start>end:
-            start, end = end, start
-        if start<0: start = 0
-        if end > len(self.qualString)+1: end = len(self.qualString)
-        self.qualString = self.qualString[start:end+1]
-        self.qualList = self.qualList[start:end+1]
-        assert len(self.qualList) == len(self.qualString)
-        
-        
-        
+        self.qualString = trim(self.qualString,start,end)
+        self.qualList = trim(self.qualList,start,end)
         
         
 if __name__ == '__main__':
