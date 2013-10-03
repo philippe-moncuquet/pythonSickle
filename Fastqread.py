@@ -6,6 +6,8 @@ class fastqread:
     def __init__(self,fastq_str):
         ''' Take a string corresponding to a read from a fastq file, return 3 attributes: 
             name of sequence, sequence, quality score
+            self.seq is a DNAsequence object
+            self.score is a qualityScore object
         '''
         input = fastq_str.split("/n")
         self.name = input[0]
